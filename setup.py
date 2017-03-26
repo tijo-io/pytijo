@@ -9,7 +9,7 @@ setup(name='structifytext',
       description='Structured unstructured text (output)',
       author='Darin Sikanic',
       author_email='darin.sikanic@gmail.com',
-      url='https://gitlab.com/tsen/structifytext',
+      url='https://github.com/darinsikanic/structifytext',
       packages=find_packages(),
       classifiers=[
           'Development Status :: 2 - Pre-Alpha',
