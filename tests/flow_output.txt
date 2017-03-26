@@ -1,0 +1,762 @@
+        [##################################################] 100%       Flow entries
+[FLOW_ENTRIES] Total entries: 34
+[TABLE 0] Total entries: 3
+    [FLOW_ID1]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 1000
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000100000064
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+        [INSTRUCTIONS]
+            [OFPIT_GOTO_TABLE]
+                table = 1
+    [FLOW_ID2]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 1001
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000300000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+        [INSTRUCTIONS]
+            [OFPIT_GOTO_TABLE]
+                table = 1
+    [FLOW_ID3]
+        Timestamp        = Tue Mar 21 22:46:52 2017
+        ofp_version      = 4
+        ControllerGroup  = 2
+        ControllerId     = 1
+        Priority         = 99
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 55029
+        Byte_count       = 7163163
+        Cookie           = 1f0000020000000a
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x88cc
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_OUTPUT]
+                        port = ctrl
+                        mlen = 65535
+
+[TABLE 1] Total entries: 31
+    [FLOW_ID1]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001100000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18005
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000096
+    [FLOW_ID2]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000600000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 15005
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_POP_MPLS]
+                        eth = 0x8847
+                    [OFPAT_OUTPUT]
+                        port = 5
+    [FLOW_ID4]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000800000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18003
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000093
+    [FLOW_ID5]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000d00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18002
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000080
+    [FLOW_ID7]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000500000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 15006
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_POP_MPLS]
+                        eth = 0x8847
+                    [OFPAT_OUTPUT]
+                        port = 6
+    [FLOW_ID9]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000f00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18005
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000097
+    [FLOW_ID10]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001c00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18006
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000011
+    [FLOW_ID12]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001f00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18008
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000008
+    [FLOW_ID11]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001700000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18007
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000099
+    [FLOW_ID13]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 40
+        Byte_count       = 3604
+        Cookie           = 1f00000a00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18002
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000077
+    [FLOW_ID14]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 10
+        Byte_count       = 640
+        Cookie           = 1f00000700000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18003
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000092
+    [FLOW_ID16]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000e00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18005
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000018
+    [FLOW_ID18]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 343
+        Byte_count       = 23826
+        Cookie           = 1f00001600000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18007
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000098
+    [FLOW_ID20]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000b00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18002
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000078
+    [FLOW_ID19]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 470
+        Byte_count       = 30080
+        Cookie           = 1f00001d00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18008
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000020
+    [FLOW_ID17]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001900000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18006
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000017
+    [FLOW_ID23]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001a00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18006
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000018
+    [FLOW_ID24]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001000000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18005
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000018
+    [FLOW_ID25]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001e00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18008
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000021
+    [FLOW_ID26]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001800000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18007
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000100
+    [FLOW_ID27]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000400000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 15008
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_POP_MPLS]
+                        eth = 0x8847
+                    [OFPAT_OUTPUT]
+                        port = 8
+    [FLOW_ID28]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00002000000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18008
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000020
+    [FLOW_ID29]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00001b00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18006
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000019
+    [FLOW_ID40]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00003100000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18004
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000082
+    [FLOW_ID41]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00002e00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18002
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000079
+    [FLOW_ID42]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00003200000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18004
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000011
+    [FLOW_ID43]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30310
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00002f00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18004
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000011
+    [FLOW_ID44]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00003000000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18004
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000081
+    [FLOW_ID45]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00002d00000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 5
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18003
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000094
+    [FLOW_ID46]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00003600000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 6
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18007
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000101
+    [FLOW_ID47]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 30311
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00003500000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_IN_PORT = 8
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+            OFPXMT_OFB_MPLS_LABEL = 18003
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_GROUP]
+                        id = 2000000095
+
+[TABLE 11] Total entries: 3
+    [FLOW_ID1]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 1000
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000100000064
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+        [INSTRUCTIONS]
+            [OFPIT_GOTO_TABLE]
+                table = 1
+    [FLOW_ID2]
+        Timestamp        = Wed Mar 22 00:58:03 2017
+        ofp_version      = 4
+        ControllerGroup  = 1
+        ControllerId     = 1
+        Priority         = 1001
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 0
+        Byte_count       = 0
+        Cookie           = 1f00000300000190
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x8847
+        [INSTRUCTIONS]
+            [OFPIT_GOTO_TABLE]
+                table = 1
+    [FLOW_ID3]
+        Timestamp        = Tue Mar 21 22:46:52 2017
+        ofp_version      = 4
+        ControllerGroup  = 2
+        ControllerId     = 1
+        Priority         = 99
+        Idle_timeout     = 0
+        Hard_timeout     = 0
+        Packet_count     = 55029
+        Byte_count       = 7163163
+        Cookie           = 1f0000020000000a
+        Send_flow_rem    = false
+        [MATCHFIELDS]
+            OFPXMT_OFB_ETH_TYPE = 0x88cc
+        [INSTRUCTIONS]
+            [OFPIT_APPLY_ACTIONS]
+                 [ACTIONS]
+                    [OFPAT_OUTPUT]
+                        port = ctrl
+                        mlen = 65535
