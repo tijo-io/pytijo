@@ -1,0 +1,68 @@
+{
+  "groups": [
+    {
+      "packet_count": "10",
+      "byte_count": "20",
+      "bucket": [
+        {
+          "packet_count": "30",
+          "byte_count": "40",
+          "id": "0"
+        },
+        {
+          "packet_count": "50",
+          "byte_count": "60",
+          "id": "1"
+        }
+      ],
+      "id": "2000000000",
+      "ref_count": "2"
+    },
+    {
+      "packet_count": "70",
+      "byte_count": "80",
+      "bucket": [
+        {
+          "packet_count": "90",
+          "byte_count": "100",
+          "id": "0"
+        },
+        {
+          "packet_count": "110",
+          "byte_count": "120",
+          "id": "1"
+        },
+        {
+          "packet_count": "130",
+          "byte_count": "140",
+          "id": "2"
+        }
+      ],
+      "id": "2000000001",
+      "ref_count": "1"
+    },
+    {
+      "packet_count": "150",
+      "byte_count": "160",
+      "bucket": [
+        {
+          "packet_count": "170",
+          "byte_count": "180",
+          "id": "0"
+        },
+        {
+          "packet_count": "190",
+          "byte_count": "200",
+          "id": "1"
+        },
+        {
+          "packet_count": "210",
+          "byte_count": "220",
+          "id": "2"
+        }
+      ],
+      "id": "2000000002",
+      "ref_count": "1"
+    }
+  ]
+}

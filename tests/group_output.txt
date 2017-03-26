@@ -1,0 +1,50 @@
+    +----------------------+
+    | Group id: 2000000000 |
+    +----------------------+
+    Reference count:  2
+    Packet count:     10
+    Byte count:       20
+    Duration (sec):   248541
+    Duration (nsec):  568884914
+    Bucket  0:
+        Packet count:  30
+        Byte count:    40
+    Bucket  1:
+        Packet count:  50
+        Byte count:    60
+
+    +----------------------+
+    | Group id: 2000000001 |
+    +----------------------+
+    Reference count:  1
+    Packet count:     70
+    Byte count:       80
+    Duration (sec):   248541
+    Duration (nsec):  568535647
+    Bucket  0:
+        Packet count:  90
+        Byte count:    100
+    Bucket  1:
+        Packet count:  110
+        Byte count:    120
+    Bucket  2:
+        Packet count:  130
+        Byte count:    140
+
+    +----------------------+
+    | Group id: 2000000002 |
+    +----------------------+
+    Reference count:  1
+    Packet count:     150
+    Byte count:       160
+    Duration (sec):   248541
+    Duration (nsec):  568024472
+    Bucket  0:
+        Packet count:  170
+        Byte count:    180
+    Bucket  1:
+        Packet count:  190
+        Byte count:    200
+    Bucket  2:
+        Packet count:  210
+        Byte count:    220

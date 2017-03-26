@@ -7,7 +7,7 @@ def parse_struct(lines, struct):
                 chunks = chunk_lines(lines, v[0])
                 parsed[k] = [parse_struct(chunk, v[0]) for chunk in chunks]
             else:
-                parsed[k] = parse_regex(lines, v[0])
+                parsed[k] = parse_regex(lines, v[0], return_list=True)
         elif isinstance(v, dict):
             parsed[k] = parse_struct(lines, v)
         else:
@@ -33,8 +33,8 @@ def chunk_lines(lines, struct):
     return chunks
 
 
-def parse_regex(lines, regex):
+def parse_regex(lines, regex, return_list=False):
     values = [m.group(1) for l in lines for m in [regex.search(l)] if m]
-    if 0 < len(values) < 2:
+    if not return_list or 0 < len(values) < 2:
         return values[0]
     return values
