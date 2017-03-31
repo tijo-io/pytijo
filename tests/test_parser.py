@@ -109,9 +109,9 @@ def test_value_with_two_groups_raises_warning():
 def test_list_with_dict_no_id_raises_exception():
     struct = {'letter': [{'to': 'Dear\s+(\w+)', 'from': 'Regards,\s+(\w+)'}]}
     letter = "Dear Einstein,\r\n"
-    letter += "I am a death destroyer of worlds.\r\n"
+    letter += "I am become Death, the destroyer of worlds.\r\n"
     letter += "And it's all your fault!\r\n"
-    letter += "Regards, Openhiemer\r\n"
+    letter += "Regards, Oppenheimer\r\n"
     lines = StringIO(letter).readlines()
     logger.debug(lines)
     with pytest.raises(KeyError):
