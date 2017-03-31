@@ -11,7 +11,7 @@ deps:
 	pip install virtualenv
 	virtualenv .venv
 	source ./venv/bin/activate
-	pip install -r dev-requirements
+	pip install -r dev-requirements.txt
 
 clean:
 	rm -rf .cache/ .tox/ *.egg-info *.key

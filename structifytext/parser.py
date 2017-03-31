@@ -1,3 +1,5 @@
+import re
+
 
 def parse_struct(lines, struct):
     parsed = {}
@@ -7,17 +9,19 @@ def parse_struct(lines, struct):
                 chunks = chunk_lines(lines, v[0])
                 parsed[k] = [parse_struct(chunk, v[0]) for chunk in chunks]
             else:
-                parsed[k] = parse_regex(lines, v[0], return_list=True)
+                parsed[k] = parse_regex(lines, k, v[0], return_list=True)
         elif isinstance(v, dict):
             parsed[k] = parse_struct(lines, v)
         else:
-            parsed[k] = parse_regex(lines, v)
+            parsed[k] = parse_regex(lines, k, v)
     return parsed
 
 
 def chunk_lines(lines, struct):
-    id_regex = struct['id']
-    matched_ids = filter(id_regex.match, lines)
+    if 'id' not in struct:
+        raise KeyError("'id' key is required in a list containing a dictionary")
+    id_regex = _compile_regex('id', struct['id'])
+    matched_ids = filter(id_regex.search, lines)
     match_indexes = sorted(list(set(map(lambda x: lines.index(x), matched_ids))))
 
     chunks = []
@@ -33,8 +37,19 @@ def chunk_lines(lines, struct):
     return chunks
 
 
-def parse_regex(lines, regex, return_list=False):
+def parse_regex(lines, key, regex, return_list=False):
+    regex = _compile_regex(key, regex)
+    if regex.groups < 1:
+        raise ValueError("The regular expression at key '{}' must contain a regex group (...)".format(key))
+    elif regex.groups > 1:
+        raise UserWarning("The regular expression at key '{}' should contain only one regex group".format(key))
     values = [m.group(1) for l in lines for m in [regex.search(l)] if m]
     if len(values) > 0 and (not return_list or len(values) < 2):
         return values[0]
     return values
+
+
+def _compile_regex(key, regex):
+    if not isinstance(regex, basestring):
+        raise TypeError("The value at key '{}' must be a regular expression string".format(key))
+    return re.compile(regex)
