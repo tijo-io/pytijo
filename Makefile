@@ -8,7 +8,7 @@ help:
 	@echo "  test    - run tox"
 
 deps:
-	pip install virtualenv
+	type virtualenv > /dev/null 2>&1 || pip install virtualenv
 	virtualenv .venv
 	source ./venv/bin/activate
 	pip install -r dev-requirements.txt
@@ -24,5 +24,5 @@ install:
 	python setup.py install
 
 test:
-	pip install tox
+	type tox > /dev/null 2>&1 || pip install tox
 	tox
