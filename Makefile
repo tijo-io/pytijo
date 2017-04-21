@@ -1,4 +1,4 @@
-.PHONY: all deps clean dev install test
+.PHONY: deps clean dev install package test
 
 help:
 	@echo "  deps    - installs and configures dependencies in virtualenv"
@@ -9,12 +9,11 @@ help:
 
 deps:
 	type virtualenv > /dev/null 2>&1 || pip install virtualenv
-	virtualenv .venv
-	source ./venv/bin/activate
-	pip install -r dev-requirements.txt
+	test -d .venv || virtualenv .venv
+	.venv/bin/pip install -Ur dev-requirements.txt
 
 clean:
-	rm -rf .cache/ .tox/ *.egg-info *.key
+	rm -rf .cache/ .tox/ *.egg-info dist build
 
 dev:
 	deps
@@ -22,6 +21,9 @@ dev:
 
 install:
 	python setup.py install
+
+package:
+	python setup.py bdist_wheel
 
 test:
 	type tox > /dev/null 2>&1 || pip install tox
