@@ -1,10 +1,7 @@
 import re
 import pytest
-import logging
 from structifytext import parser
 from cStringIO import StringIO
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 @pytest.fixture(scope='module')
 def mock_chunky_data(request):
