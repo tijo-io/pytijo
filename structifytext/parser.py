@@ -1,52 +1,87 @@
 import re
-
+import warnings
 
 def parse_struct(lines, struct):
     parsed = {}
     for k,v in struct.iteritems():
         if isinstance(v, (list, tuple)) and not isinstance(v, basestring) and len(v) > 0:
-            if isinstance(v[0], dict):
-                chunks = chunk_lines(lines, v[0])
-                parsed[k] = [parse_struct(chunk, v[0]) for chunk in chunks]
-            else:
-                parsed[k] = parse_regex(lines, k, v[0], return_list=True)
+            parsed[k] = _parse_list(k, v, lines)
         elif isinstance(v, dict):
-            parsed[k] = parse_struct(lines, v)
+            parsed[k] = _parse_dict(v, lines)
         else:
-            parsed[k] = parse_regex(lines, k, v)
+            if k != 'block_start' and k != 'block_end':
+                parsed[k] = _parse_regex(lines, k, v)
     return parsed
 
 
-def chunk_lines(lines, struct):
-    if 'id' not in struct:
-        raise KeyError("'id' key is required in a list containing a dictionary")
-    id_regex = _compile_regex('id', struct['id'])
-    matched_ids = filter(id_regex.search, lines)
-    match_indexes = sorted(list(set(map(lambda x: lines.index(x), matched_ids))))
+def _parse_list(key, value, lines):
+    if isinstance(value[0], dict):
+        return _parse_dict(value[0], lines, return_list=True)
+    else:
+        return _parse_regex(lines, key, value[0], return_list=True)
 
+
+def _parse_dict(value, lines, return_list=False):
+    if value.has_key('block_start') or value.has_key('id'):
+        chunks = _chunk_lines(lines, value)
+        if chunks is not None:
+            parsed = [parse_struct(chunk, value) for chunk in chunks]
+        return None if chunks is None else parsed if return_list else parsed[0]
+    return parse_struct(lines, value)
+
+
+def _chunk_lines(lines, struct):
+    if 'id' not in struct and 'block_start' not in struct:
+        raise KeyError("'id' or 'block_start' key is required in a list containing a dictionary")
+    id = struct['block_start'] if 'block_start' in struct else struct['id']
+    id_regex = _compile_regex('id', id)
+    matches = filter(id_regex.search, lines)
+    if not matches:
+        return None
+    match_indexes = _index_of_matches(matches, lines)
+    force_block_end_index = -1
+    if 'block_end' in struct:
+        block_end_regex = _compile_regex('block_end', struct['block_end'])
+        block_end_matches = filter(block_end_regex.search, lines)
+        if block_end_matches:
+            block_end_indexes = _index_of_matches(block_end_matches, lines)
+            force_block_end_index = next(i for i in block_end_indexes if i > match_indexes[0])
+        else:
+            warnings.warn("The block_end regular expression does not find a match")
+
+    return _do_chunk_lines(lines, match_indexes, force_block_end_index)
+
+
+def _do_chunk_lines(lines, match_indexes, force_block_end_index=-1):
     chunks = []
-    block_end = match_indexes[-1]
+    if force_block_end_index >= 0:
+        return [lines[match_indexes[0]:force_block_end_index]]
     for idx, val in enumerate(match_indexes):
         if idx+1 >= len(match_indexes):
             chunks.append(lines[val::])
-        elif val <= block_end:
-            if match_indexes[idx + 1] >= block_end:
-                chunks.append(lines[val:block_end])
+        elif val <= match_indexes[-1]:
+            if match_indexes[idx + 1] >= match_indexes[-1]:
+                chunks.append(lines[val:match_indexes[-1]])
             else:
                 chunks.append(lines[val:match_indexes[idx + 1]])
     return chunks
 
 
-def parse_regex(lines, key, regex, return_list=False):
+def _parse_regex(lines, key, regex, return_list=False):
     regex = _compile_regex(key, regex)
     if regex.groups < 1:
         raise ValueError("The regular expression at key '{}' must contain a regex group (...)".format(key))
     elif regex.groups > 1:
-        raise UserWarning("The regular expression at key '{}' should contain only one regex group".format(key))
+        warnings.warn("The regular expression at key '{}' should contain only one regex group".format(key))
     values = [m.group(1) for l in lines for m in [regex.search(l)] if m]
-    if len(values) > 0 and (not return_list or len(values) < 2):
+    if len(values) > 0 and not return_list:
         return values[0]
-    return values
+    return values if len(values) > 0 else None
+
+
+def _index_of_matches(matches, lines):
+    # list(set([])) removes duplicates
+    return sorted(list(set(map(lambda x: lines.index(x), matches))))
 
 
 def _compile_regex(key, regex):

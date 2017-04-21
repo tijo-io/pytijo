@@ -1,123 +1,1171 @@
 {
-	'tables': [{
-		'id': '0',
-		'flows': [{
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '1'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '2'
-		}, {
-			'timestamp': 'Tue Mar 21 22:46:52 2017',
-			'id': '3'
-		}]
-	}, {
-		'id': '1',
-		'flows': [{
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '1'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '2'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '4'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '5'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '7'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '9'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '10'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '12'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '11'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '13'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '14'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '16'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '18'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '20'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '19'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '17'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '23'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '24'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '25'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '26'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '27'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '28'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '29'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '40'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '41'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '42'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '43'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '44'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '45'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '46'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '47'
-		}]
-	}, {
-		'id': '11',
-		'flows': [{
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '1'
-		}, {
-			'timestamp': 'Wed Mar 22 00:58:03 2017',
-			'id': '2'
-		}, {
-			'timestamp': 'Tue Mar 21 22:46:52 2017',
-			'id': '3'
-		}]
-	}]
+  "tables": [
+    {
+      "id": "0",
+      "flows": [
+        {
+          "priority": "1000",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000100000064",
+          "send_flow_rem": "false",
+          "id": "1",
+          "instructions": {
+            "go_to_table": {
+              "table": "1"
+            },
+            "apply_actions": null
+          }
+        },
+        {
+          "priority": "1001",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000300000190",
+          "send_flow_rem": "false",
+          "id": "2",
+          "instructions": {
+            "go_to_table": {
+              "table": "1"
+            },
+            "apply_actions": null
+          }
+        },
+        {
+          "priority": "99",
+          "controller_group": "2",
+          "hard_timeout": "0",
+          "byte_count": "7163163",
+          "timestamp": "Tue Mar 21 22:46:52 2017",
+          "controller_id": "1",
+          "packet_count": "55029",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x88cc"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f0000020000000a",
+          "send_flow_rem": "false",
+          "id": "3",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": "ctrl",
+                "mlen": "65535"
+              },
+              "group": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "flows": [
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18005",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001100000190",
+          "send_flow_rem": "false",
+          "id": "1",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000096"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "15005",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000600000190",
+          "send_flow_rem": "false",
+          "id": "2",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": {
+                "eth": "0x8847"
+              },
+              "output": {
+                "port": "5",
+                "mlen": null
+              },
+              "group": null
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18003",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000800000190",
+          "send_flow_rem": "false",
+          "id": "4",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000093"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18002",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000d00000190",
+          "send_flow_rem": "false",
+          "id": "5",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000080"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "15006",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000500000190",
+          "send_flow_rem": "false",
+          "id": "7",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": {
+                "eth": "0x8847"
+              },
+              "output": {
+                "port": "6",
+                "mlen": null
+              },
+              "group": null
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18005",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000f00000190",
+          "send_flow_rem": "false",
+          "id": "9",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000097"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18006",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001c00000190",
+          "send_flow_rem": "false",
+          "id": "10",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000011"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18008",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001f00000190",
+          "send_flow_rem": "false",
+          "id": "12",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000008"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18007",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001700000190",
+          "send_flow_rem": "false",
+          "id": "11",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000099"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "3604",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "40",
+          "match_fields": {
+            "mpls_label": "18002",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000a00000190",
+          "send_flow_rem": "false",
+          "id": "13",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000077"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "640",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "10",
+          "match_fields": {
+            "mpls_label": "18003",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000700000190",
+          "send_flow_rem": "false",
+          "id": "14",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000092"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18005",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000e00000190",
+          "send_flow_rem": "false",
+          "id": "16",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000018"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "23826",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "343",
+          "match_fields": {
+            "mpls_label": "18007",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001600000190",
+          "send_flow_rem": "false",
+          "id": "18",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000098"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18002",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000b00000190",
+          "send_flow_rem": "false",
+          "id": "20",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000078"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "30080",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "470",
+          "match_fields": {
+            "mpls_label": "18008",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001d00000190",
+          "send_flow_rem": "false",
+          "id": "19",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000020"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18006",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001900000190",
+          "send_flow_rem": "false",
+          "id": "17",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000017"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18006",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001a00000190",
+          "send_flow_rem": "false",
+          "id": "23",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000018"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18005",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001000000190",
+          "send_flow_rem": "false",
+          "id": "24",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000018"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18008",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001e00000190",
+          "send_flow_rem": "false",
+          "id": "25",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000021"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18007",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001800000190",
+          "send_flow_rem": "false",
+          "id": "26",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000100"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "15008",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000400000190",
+          "send_flow_rem": "false",
+          "id": "27",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": {
+                "eth": "0x8847"
+              },
+              "output": {
+                "port": "8",
+                "mlen": null
+              },
+              "group": null
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18008",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00002000000190",
+          "send_flow_rem": "false",
+          "id": "28",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000020"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18006",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00001b00000190",
+          "send_flow_rem": "false",
+          "id": "29",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000019"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18004",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00003100000190",
+          "send_flow_rem": "false",
+          "id": "40",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000082"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18002",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00002e00000190",
+          "send_flow_rem": "false",
+          "id": "41",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000079"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18004",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00003200000190",
+          "send_flow_rem": "false",
+          "id": "42",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000011"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30310",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18004",
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00002f00000190",
+          "send_flow_rem": "false",
+          "id": "43",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000011"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18004",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00003000000190",
+          "send_flow_rem": "false",
+          "id": "44",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000081"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18003",
+            "in_port": "5",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00002d00000190",
+          "send_flow_rem": "false",
+          "id": "45",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000094"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18007",
+            "in_port": "6",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00003600000190",
+          "send_flow_rem": "false",
+          "id": "46",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000101"
+              }
+            }
+          }
+        },
+        {
+          "priority": "30311",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": "18003",
+            "in_port": "8",
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00003500000190",
+          "send_flow_rem": "false",
+          "id": "47",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": null,
+                "mlen": null
+              },
+              "group": {
+                "id": "2000000095"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "flows": [
+        {
+          "priority": "1000",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000100000064",
+          "send_flow_rem": "false",
+          "id": "1",
+          "instructions": {
+            "go_to_table": {
+              "table": "1"
+            },
+            "apply_actions": null
+          }
+        },
+        {
+          "priority": "1001",
+          "controller_group": "1",
+          "hard_timeout": "0",
+          "byte_count": "0",
+          "timestamp": "Wed Mar 22 00:58:03 2017",
+          "controller_id": "1",
+          "packet_count": "0",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x8847"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f00000300000190",
+          "send_flow_rem": "false",
+          "id": "2",
+          "instructions": {
+            "go_to_table": {
+              "table": "1"
+            },
+            "apply_actions": null
+          }
+        },
+        {
+          "priority": "99",
+          "controller_group": "2",
+          "hard_timeout": "0",
+          "byte_count": "7163163",
+          "timestamp": "Tue Mar 21 22:46:52 2017",
+          "controller_id": "1",
+          "packet_count": "55029",
+          "match_fields": {
+            "mpls_label": null,
+            "in_port": null,
+            "ether_type": "0x88cc"
+          },
+          "idle_timeout": "0",
+          "ofp_version": "4",
+          "cookie": "1f0000020000000a",
+          "send_flow_rem": "false",
+          "id": "3",
+          "instructions": {
+            "go_to_table": null,
+            "apply_actions": {
+              "pop_mpls": null,
+              "output": {
+                "port": "ctrl",
+                "mlen": "65535"
+              },
+              "group": null
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
