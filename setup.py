@@ -5,12 +5,13 @@ Setup for Structify Text
 from setuptools import setup, find_packages
 
 setup(name='structifytext',
-      version='0.0.1',
-      description='Structured unstructured text (output)',
+      version='0.1.0',
+      description='Structured semi-structured text',
       author='Darin Sikanic',
       author_email='darin.sikanic@gmail.com',
       url='https://github.com/darinsikanic/structifytext',
-      packages=find_packages(),
+      packages=find_packages(exclude=['tests']),
+      keywords='sructuretext structifytext structure text network cli parser',
       classifiers=[
           'Development Status :: 2 - Pre-Alpha',
           'Intended Audience :: Developers',
