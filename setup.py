@@ -5,8 +5,8 @@ Setup for Structify Text
 from setuptools import setup, find_packages
 
 setup(name='structifytext',
-      version='0.1.0',
-      description='Structured semi-structured text',
+      version='0.1.1',
+      description='Structure semi-structured text',
       license='Apache',
       author='Darin Sikanic',
       author_email='darin.sikanic@gmail.com',
