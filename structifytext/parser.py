@@ -3,6 +3,12 @@ import six
 import warnings
 
 
+def parse(text, struct):
+    if isinstance(text, six.string_types):
+        return parse_struct(six.BytesIO(text).readlines(), struct)
+    return None
+
+
 def parse_struct(lines, struct):
     parsed = {}
     for k, v in six.iteritems(struct):

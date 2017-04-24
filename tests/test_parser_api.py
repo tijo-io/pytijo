@@ -118,3 +118,9 @@ def test_groups(mock_group_struct):
     expected_output = json.loads(read('./group_output_parsed.txt'))
     parsed = parser.parse_struct(lines, mock_group_struct)
     assert parsed == expected_output
+
+
+def test_parse(mock_struct):
+    expected_output = json.loads(read('./flow_output_parsed.txt'))
+    parsed = parser.parse(read('./flow_output.txt'), mock_struct)
+    assert parsed == expected_output
