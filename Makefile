@@ -1,10 +1,11 @@
-.PHONY: deps clean dev install package test
+.PHONY: help deps clean dev install package test
 
 help:
 	@echo "  deps    - installs and configures dependencies in virtualenv"
 	@echo "  clean   - removes unwanted files"
 	@echo "  dev     - prepares a development environments"
 	@echo "  install - install library on local system"
+	@echo "  package - creates python packages for distribution"
 	@echo "  test    - run tox"
 
 deps:
@@ -23,7 +24,7 @@ install:
 	python setup.py install
 
 package:
-	python setup.py bdist_wheel
+	python setup.py sdist bdist_wheel
 
 test:
 	type tox > /dev/null 2>&1 || pip install tox
