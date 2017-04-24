@@ -2,7 +2,7 @@ import os
 import json
 import pytest
 from structifytext import parser
-from cStringIO import StringIO
+from StringIO import StringIO
 
 @pytest.fixture(scope='module')
 def mock_struct(request):

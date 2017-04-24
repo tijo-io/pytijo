@@ -1,7 +1,7 @@
 import re
 import pytest
 from structifytext import parser
-from cStringIO import StringIO
+from StringIO import StringIO
 
 @pytest.fixture(scope='module')
 def mock_chunky_data(request):

@@ -1,10 +1,12 @@
 import re
+import six
 import warnings
+
 
 def parse_struct(lines, struct):
     parsed = {}
-    for k,v in struct.iteritems():
-        if isinstance(v, (list, tuple)) and not isinstance(v, basestring) and len(v) > 0:
+    for k, v in six.iteritems(struct):
+        if isinstance(v, (list, tuple)) and not isinstance(v, six.string_types) and len(v) > 0:
             parsed[k] = _parse_list(k, v, lines)
         elif isinstance(v, dict):
             parsed[k] = _parse_dict(v, lines)
@@ -22,11 +24,12 @@ def _parse_list(key, value, lines):
 
 
 def _parse_dict(value, lines, return_list=False):
-    if value.has_key('block_start') or value.has_key('id'):
+    if 'block_start' in value or 'id' in value:
         chunks = _chunk_lines(lines, value)
         if chunks is not None:
             parsed = [parse_struct(chunk, value) for chunk in chunks]
-        return None if chunks is None else parsed if return_list else parsed[0]
+            return parsed if return_list else parsed[0]
+        return None
     return parse_struct(lines, value)
 
 
@@ -73,7 +76,7 @@ def _parse_regex(lines, key, regex, return_list=False):
         raise ValueError("The regular expression at key '{}' must contain a regex group (...)".format(key))
     elif regex.groups > 1:
         warnings.warn("The regular expression at key '{}' should contain only one regex group".format(key))
-    values = [m.group(1) for l in lines for m in [regex.search(l)] if m]
+    values = [m for l in lines for m in regex.findall(l) if m]
     if len(values) > 0 and not return_list:
         return values[0]
     return values if len(values) > 0 else None
@@ -85,6 +88,6 @@ def _index_of_matches(matches, lines):
 
 
 def _compile_regex(key, regex):
-    if not isinstance(regex, basestring):
+    if not isinstance(regex, six.string_types):
         raise TypeError("The value at key '{}' must be a regular expression string".format(key))
     return re.compile(regex)
