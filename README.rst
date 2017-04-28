@@ -18,12 +18,79 @@ Well that’s where ``structifytext`` tries to help. It lets you define
 the payload you wish came back to you, and with a sprinkle of the right
 regular expressions it does!
 
+Installation
+------------
+
+With pip:
+::
+
+  pip install structifytext
+
+From source
+::
+
+  make install
+
+
 Usage
 -----
 
-At less than 100 lines of code it’s quite simple. The ``parse_struct``
-method expects a “structure” and an output string converted to a list (I
-found the easiest way to do this is to use ``StringIO.readlines()``).
+Pass your text and a "structure" (python dictionary) to the ``parser`` modules ``parse`` method.
+
+::
+
+  from structifytext import parser
+
+  output = """
+    eth0      Link encap:Ethernet  HWaddr 00:11:22:3a:c4:ac
+              inet addr:192.168.1.2  Bcast:192.168.1.255  Mask:255.255.255.0
+              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+              RX packets:147142475 errors:0 dropped:293854 overruns:0 frame:0
+              TX packets:136237118 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000
+              RX bytes:17793317674 (17.7 GB)  TX bytes:46525697959 (46.5 GB)
+
+    eth1      Link encap:Ethernet  HWaddr 00:11:33:4a:c8:ad
+              inet addr:192.168.1.3  Bcast:192.168.1.255  Mask:255.255.255.0
+              inet6 addr: fe80::225:90ff:fe4a:c8ad/64 Scope:Link
+              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+              RX packets:51085118 errors:0 dropped:251 overruns:0 frame:0
+              TX packets:3447162 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000
+              RX bytes:4999277179 (4.9 GB)  TX bytes:657283496 (657.2 MB)
+    """
+  
+  struct = {
+          'interfaces': [{
+              'id': '(eth\d{1,2})',
+              'ipv4_address': 'inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
+              'mac_address': 'HWaddr\s((?:[a-fA-F0-9]{2}[:|\-]?){6})'
+            }]
+         }
+
+  parsed = parser.parse(output, struct)
+  print parsed
+
+This will return the python dictionary
+
+::
+
+  {
+    'interfaces': [
+        {
+            'id': 'eth0',
+            'ipv4_address': '192.168.1.2',
+            'mac_address': '00:11:22:3a:c4:ac'
+        },
+        {
+            'id': 'eth1',
+            'ipv4_address': '192.168.1.3',
+            'mac_address': '00:11:33:4a:c8:ad'
+        }
+    ]
+  }
+
+Which you can then do with as you please, maybe return as JSON as part of a REST service...
 
 The Struct
 ~~~~~~~~~~
@@ -31,12 +98,11 @@ The Struct
 | A stuct or structure or payload or whatever have you, is just a
   dictionary that resembles what you wish to get back.
 | With the values either being a dictionary ``{}``, a list ``[]``, or a
-  regular expression string ``[a-z](\d)`` with one group (to populate
+  regular expression string ``[a-z](\d)`` with **one group** (to populate
   the value).
 
-The structure is recursively parsed, to populate the
-dictionary/structure that was provided with values from the input string
-list.
+The structure is recursively parsed, populating the
+dictionary/structure that was provided with values from the input text.
 
 | Quite often, similar sections of semi-structured text are repeated in
   the text you are trying to parse.
