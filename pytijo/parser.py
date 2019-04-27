@@ -5,7 +5,7 @@ import warnings
 
 def parse(text, struct):
     if isinstance(text, six.string_types):
-        return parse_struct(six.BytesIO(text).readlines(), struct)
+        return parse_struct(text.splitlines(), struct)
     return None
 
 
@@ -44,17 +44,17 @@ def _chunk_lines(lines, struct):
         raise KeyError("'id' or 'block_start' key is required in a list containing a dictionary")
     id = struct['block_start'] if 'block_start' in struct else struct['id']
     id_regex = _compile_regex('id', id)
-    matches = filter(id_regex.search, lines)
+    matches = list(filter(id_regex.search, lines))
     if not matches:
         return None
     match_indexes = _index_of_matches(matches, lines)
     force_block_end_index = -1
     if 'block_end' in struct:
         block_end_regex = _compile_regex('block_end', struct['block_end'])
-        block_end_matches = filter(block_end_regex.search, lines)
+        block_end_matches = list(filter(block_end_regex.search, lines))
         if block_end_matches:
             block_end_indexes = _index_of_matches(block_end_matches, lines)
-            force_block_end_index = next(i for i in block_end_indexes if i > match_indexes[0])
+            force_block_end_index = next((i for i in block_end_indexes if i > match_indexes[0]), -1)
         else:
             warnings.warn("The block_end regular expression does not find a match")
 

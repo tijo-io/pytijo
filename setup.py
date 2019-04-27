@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 '''
-Setup for Structify Text
+Setup for pytijo
 '''
 from setuptools import setup, find_packages
 
-setup(name='structifytext',
-      version='0.2.1',
+setup(name='pytijo',
+      version='0.0.1',
       description='Structure semi-structured text',
       license='Apache',
       author='Darin Sikanic',
       author_email='darin.sikanic@gmail.com',
-      url='https://github.com/darinsikanic/structifytext',
+      url='https://github.com/tijo-io/pytijo',
       packages=find_packages(exclude=['tests']),
       install_requires=['six'],
-      keywords='sructuretext structifytext structure text network cli parser',
+      keywords='pytijo tijo structuretext structifytext structure text network cli parser',
       classifiers=[
           'Development Status :: 2 - Pre-Alpha',
           'Intended Audience :: Developers',
@@ -22,6 +22,7 @@ setup(name='structifytext',
           'Operating System :: OS Independent',
           'Programming Language :: Python',
           'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3.7',
           'Topic :: Software Development :: Libraries',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: System :: Networking'

@@ -1,8 +1,8 @@
 import os
 import json
 import pytest
-from structifytext import parser
-from StringIO import StringIO
+from pytijo import parser
+
 
 @pytest.fixture(scope='module')
 def mock_struct(request):
@@ -102,19 +102,19 @@ def test_simple_list():
     expected_output = { 'count': [1,2,3,4,5] }
     parsed = parser.parse_struct(lines, struct)
     # We need to convert to type after parsing
-    parsed = {'count': map(int, parsed['count'])}
+    parsed = {'count': list(map(int, parsed['count']))}
     assert parsed == expected_output
 
 
 def test_flows(mock_struct):
-    lines = StringIO(read('./flow_output.txt')).readlines()
+    lines = read('./flow_output.txt').splitlines()
     expected_output = json.loads(read('./flow_output_parsed.txt'))
     parsed = parser.parse_struct(lines, mock_struct)
     assert parsed == expected_output
 
 
 def test_groups(mock_group_struct):
-    lines = StringIO(read('./group_output.txt')).readlines()
+    lines = read('./group_output.txt').splitlines()
     expected_output = json.loads(read('./group_output_parsed.txt'))
     parsed = parser.parse_struct(lines, mock_group_struct)
     assert parsed == expected_output

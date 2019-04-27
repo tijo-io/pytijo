@@ -1,8 +1,8 @@
-Structify Text
-==============
+PyTiJo - Text In JSON Out
+=========================
 
 Structures semi-structured text, useful when parsing command line output
-from networking devices.
+from unix systems and networking devices.
 
 What is it
 ----------
@@ -14,7 +14,7 @@ What is it
   it just returned something structured that I could deal with like JSON
   or some other key/value format”.
 
-Well that’s where ``structifytext`` tries to help. It lets you define
+Well that’s where ``pytijo`` tries to help. It lets you define
 the payload you wish came back to you, and with a sprinkle of the right
 regular expressions it does!
 
@@ -24,7 +24,7 @@ Installation
 With pip:
 ::
 
-  pip install structifytext
+  pip install pytijo
 
 From source
 ::
@@ -39,7 +39,7 @@ Pass your text and a "structure" (python dictionary) to the ``parser`` modules `
 
 ::
 
-  from structifytext import parser
+  from pytijo import parser
 
   output = """
     eth0      Link encap:Ethernet  HWaddr 00:11:22:3a:c4:ac
