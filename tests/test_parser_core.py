@@ -67,16 +67,25 @@ def test_parse_regex_expect_none():
     assert result is None
 
 
-def test_value_without_group_raises_exception():
+def test_value_without_parentesis():
     lines = ["Hello", "World"]
-    with pytest.raises(ValueError):
-        parser._parse_regex(lines, "somekey", "World")
+    result = parser._parse_regex(lines, "somekey", "World")
+    expected_result = "World"
+    assert result == expected_result
 
 
-def test_value_with_two_groups_raises_warning():
-    lines = ["Hello", "World"]
-    with pytest.warns(UserWarning):
-        parser._parse_regex(lines, "somekey", r"(.*)\S+(.*)")
+def test_value_with_two_groups_in_a_row():
+    lines = ["Hello World", "World"]
+    result = parser._parse_regex(lines, "somekey", r"(\S+)\s+(\S+)")
+    expected_result = "Hello"
+    assert result == expected_result
+
+
+def test_value_with_three_groups_nested():
+    lines = ["Hello World", "World"]
+    result = parser._parse_regex(lines, "somekey", r"((\S+)\s+(\S+))")
+    expected_result = "Hello World"
+    assert result == expected_result
 
 
 def test_do_chunk_lines(mock_chunky_data):

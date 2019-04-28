@@ -86,19 +86,13 @@ def _do_chunk_lines(lines, match_indexes, force_block_end_index=-1):
 
 def _parse_regex(lines, key, regex, return_list=False):
     regex = _compile_regex(key, regex)
-    if regex.groups < 1:
-        raise ValueError(
-            "The regular expression at key '{}' must contain a regex group (...)".format(
-                key
-            )
-        )
-    elif regex.groups > 1:
-        warnings.warn(
-            "The regular expression at key '{}' should contain only one regex group".format(
-                key
-            )
-        )
-    values = [m for l in lines for m in regex.findall(l) if m]
+    values = []
+    for line in lines:
+        # TODO: think if we shuold take more values from a single line
+        # match only takes one
+        match = regex.search(line)
+        if match:
+            values.append(match.group(1) if regex.groups > 0 else match.group())
     if len(values) > 0 and not return_list:
         return values[0]
     return values if len(values) > 0 else None
