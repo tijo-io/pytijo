@@ -1,6 +1,5 @@
 test:
+  image: conchoid/docker-pyenv
   script:
-  - apt-get update -qy
-  - apt-get install -y python-dev python-pip
   - pip install -r dev-requirements.txt
   - tox
