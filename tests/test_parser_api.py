@@ -25,30 +25,30 @@ def mock_struct(request):
                         "cookie": "Cookie\s+=\s+([0-9a-fA-F]+)",
                         "send_flow_rem": "Send_flow_rem\s+=\s+(true|false)",
                         "match_fields": {
-                            "@block_start": "(\[MATCHFIELDS\])",
-                            "@block_end": "(\[INSTRUCTIONS\])",
+                            "@start": "(\[MATCHFIELDS\])",
+                            "@end": "(\[INSTRUCTIONS\])",
                             "ether_type": "OFPXMT_OFB_ETH_TYPE\s+=\s+(.+)",
                             "in_port": "OFPXMT_OFB_IN_PORT\s+=\s+(.+)",
                             "mpls_label": "OFPXMT_OFB_MPLS_LABEL\s+=\s+(.+)",
                         },
                         "instructions": {
-                            "@block_start": "(\[INSTRUCTIONS\])",
+                            "@start": "(\[INSTRUCTIONS\])",
                             "go_to_table": {
-                                "@block_start": "(\[OFPIT_GOTO_TABLE\])",
+                                "@start": "(\[OFPIT_GOTO_TABLE\])",
                                 "table": "table\s+=\s+(\d+)",
                             },
                             "apply_actions": {
-                                "@block_start": "(\[OFPIT_APPLY_ACTIONS\])",
+                                "@start": "(\[OFPIT_APPLY_ACTIONS\])",
                                 "output": {
                                     "port": "port\s+=\s+(.+)",
                                     "mlen": "mlen\s+=\s+(.+)",
                                 },
                                 "pop_mpls": {
-                                    "@block_start": "(\[OFPAT_POP_MPLS\])",
+                                    "@start": "(\[OFPAT_POP_MPLS\])",
                                     "eth": "eth\s+=\s+(.+)",
                                 },
                                 "group": {
-                                    "@block_start": "(\[OFPAT_GROUP\])",
+                                    "@start": "(\[OFPAT_GROUP\])",
                                     "@id": "id\s+=\s+(\d+)",
                                 },
                             },

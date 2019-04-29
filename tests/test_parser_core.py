@@ -115,7 +115,7 @@ def test_chunk_lines_by_id(mock_chunky_data):
 
 def test_chunk_lines_by_block_start(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"@block_start": r"(Chunk\sStart)"}
+    struct = {"@start": r"(Chunk\sStart)"}
     expected_chunks = [lines[0:3], lines[3::]]
     chunks = parser._chunk_lines(lines, struct)
     assert chunks == expected_chunks
@@ -123,7 +123,7 @@ def test_chunk_lines_by_block_start(mock_chunky_data):
 
 def test_chunk_lines_force_break_end(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"@block_start": r"(Chunk\sStart)", "@block_end": r"(chunk content 2)"}
+    struct = {"@start": r"(Chunk\sStart)", "@end": r"(chunk content 2)"}
     expected_chunks = [lines[0:4]]
     chunks = parser._chunk_lines(lines, struct)
     assert chunks == expected_chunks
@@ -131,7 +131,7 @@ def test_chunk_lines_force_break_end(mock_chunky_data):
 
 def test_chunk_lines_no_match_returns_none(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"@block_start": r"(Elephant)"}
+    struct = {"@start": r"(Elephant)"}
     chunks = parser._chunk_lines(lines, struct)
     assert chunks is None
 
@@ -145,7 +145,7 @@ def test_chunk_lines_no_id_or_block_start_raises_exception(mock_chunky_data):
 
 def test_chunk_lines_no_block_end_match_raises_warning(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"@block_start": r"(Chunk\sStart)", "@block_end": r"(Elephant)"}
+    struct = {"@start": r"(Chunk\sStart)", "@end": r"(Elephant)"}
     expected_chunks = [lines[0:3], lines[3::]]
     with pytest.warns(UserWarning):
         chunks = parser._chunk_lines(lines, struct)
@@ -170,10 +170,7 @@ def test_parse_dict_with_id(mock_chunky_data):
 
 def test_parse_dict_with_block_start(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {
-        "@block_start": r"(Chunk\sStart)",
-        "content_no": r"Some\schunk\scontent\s(\d)",
-    }
+    struct = {"@start": r"(Chunk\sStart)", "content_no": r"Some\schunk\scontent\s(\d)"}
     parsed = parser._parse_dict(struct, lines)
     expected_output = {"content_no": "1"}
     assert parsed == expected_output
@@ -181,10 +178,7 @@ def test_parse_dict_with_block_start(mock_chunky_data):
 
 def test_parse_dict_return_list(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {
-        "@block_start": r"(Chunk\sStart)",
-        "content_no": r"Some\schunk\scontent\s(\d)",
-    }
+    struct = {"@start": r"(Chunk\sStart)", "content_no": r"Some\schunk\scontent\s(\d)"}
     parsed = parser._parse_dict(struct, lines, return_list=True)
     expected_output = [{"content_no": "1"}, {"content_no": "2"}]
     assert parsed == expected_output
@@ -192,10 +186,7 @@ def test_parse_dict_return_list(mock_chunky_data):
 
 def test_parse_dict_return_none(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {
-        "@block_start": r"(Chunk\sEnd)",
-        "content_no": r"Some\schunk\scontent\s(\d)",
-    }
+    struct = {"@start": r"(Chunk\sEnd)", "content_no": r"Some\schunk\scontent\s(\d)"}
     parsed = parser._parse_dict(struct, lines)
     assert parsed is None
 

@@ -3,10 +3,10 @@ import six
 import warnings
 import importlib
 
-ATTR_ID = "@id"
+KEYWORD_ID = "@id"
 COPY_ID = True
-ATTR_BLOCK_START = "@block_start"
-ATTR_BLOCK_END = "@block_end"
+KEYWORD_START = "@start"
+KEYWORD_END = "@end"
 
 DEFAULT_MODULE_NAME = "tijo_re"
 
@@ -22,8 +22,8 @@ def parse_struct(lines, struct):
 
     # to be backwards compatible @id attributed is added as id to the output
     # TODO discuss if this should be like this
-    if ATTR_ID in struct and COPY_ID and "id" not in struct:
-        struct["id"] = struct[ATTR_ID]
+    if KEYWORD_ID in struct and COPY_ID and "id" not in struct:
+        struct["id"] = struct[KEYWORD_ID]
 
     for k, v in six.iteritems(struct):
         if not isinstance(k, six.string_types) or len(k) <= 0:
@@ -68,7 +68,7 @@ def parse_struct(lines, struct):
 
 
 def _parse_dict(value, lines, return_list=False):
-    if ATTR_BLOCK_START in value or ATTR_ID in value:
+    if KEYWORD_START in value or KEYWORD_ID in value:
         chunks = _chunk_lines(lines, value)
         if chunks is not None:
             parsed = [parse_struct(chunk, value) for chunk in chunks]
@@ -78,21 +78,21 @@ def _parse_dict(value, lines, return_list=False):
 
 
 def _chunk_lines(lines, struct):
-    if ATTR_ID not in struct and ATTR_BLOCK_START not in struct:
+    if KEYWORD_ID not in struct and KEYWORD_START not in struct:
         raise KeyError(
             "'{}' or '{}' key is required in a list containing a dictionary".format(
-                ATTR_ID, ATTR_BLOCK_START
+                KEYWORD_ID, KEYWORD_START
             )
         )
-    id = struct[ATTR_BLOCK_START] if ATTR_BLOCK_START in struct else struct[ATTR_ID]
-    id_regex = _compile_regex(ATTR_ID, id)
+    id = struct[KEYWORD_START] if KEYWORD_START in struct else struct[KEYWORD_ID]
+    id_regex = _compile_regex(KEYWORD_ID, id)
     matches = list(filter(id_regex.search, lines))
     if not matches:
         return None
     match_indexes = _index_of_matches(matches, lines)
     force_block_end_index = -1
-    if ATTR_BLOCK_END in struct:
-        block_end_regex = _compile_regex(ATTR_BLOCK_END, struct[ATTR_BLOCK_END])
+    if KEYWORD_END in struct:
+        block_end_regex = _compile_regex(KEYWORD_END, struct[KEYWORD_END])
         block_end_matches = list(filter(block_end_regex.search, lines))
         if block_end_matches:
             block_end_indexes = _index_of_matches(block_end_matches, lines)
