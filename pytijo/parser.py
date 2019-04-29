@@ -1,6 +1,14 @@
 import re
 import six
 import warnings
+import importlib
+
+ATTR_ID = "@id"
+COPY_ID = True
+ATTR_BLOCK_START = "@block_start"
+ATTR_BLOCK_END = "@block_end"
+
+DEFAULT_MODULE_NAME = "tijore"
 
 
 def parse(text, struct):
@@ -11,30 +19,56 @@ def parse(text, struct):
 
 def parse_struct(lines, struct):
     parsed = {}
+
+    # to be backwards compatible @id attributed is added as id to the output
+    # TODO discuss if this should be like this
+    if ATTR_ID in struct and COPY_ID and "id" not in struct:
+        struct["id"] = struct[ATTR_ID]
+
     for k, v in six.iteritems(struct):
-        if (
-            isinstance(v, (list, tuple))
-            and not isinstance(v, six.string_types)
-            and len(v) > 0
-        ):
-            parsed[k] = _parse_list(k, v, lines)
-        elif isinstance(v, dict):
-            parsed[k] = _parse_dict(v, lines)
-        else:
-            if k != "block_start" and k != "block_end":
-                parsed[k] = _parse_regex(lines, k, v)
+        if not isinstance(k, six.string_types) or len(k) <= 0:
+            continue
+
+        k = k.strip()
+        index_at = k.find("@")
+
+        # if k starts by @ then we need to skip it
+        # because there is no need to process it
+        if index_at == 0:
+            continue
+
+        # it is a key without @ so we need to first verify
+        # if there is a dict to process
+        # the key can contain either dict or a list which the first position is a dict
+        if index_at == -1:
+            return_as_list = False
+            if (
+                isinstance(v, (list, tuple))
+                and not isinstance(v, six.string_types)
+                and len(v) > 0
+                and isinstance(v[0], dict)
+            ):
+                v = v[0]
+                return_as_list = True
+
+            if isinstance(v, dict):
+                parsed[k] = _parse_dict(v, lines, return_list=return_as_list)
+                continue
+
+        # we need to process the key/value with a module
+        # by default we use re module
+        key_name = k if index_at < 0 else k[:index_at]
+        module_name = DEFAULT_MODULE_NAME if index_at < 0 else k[index_at + 1 :]
+        module_name = module_name if len(module_name) > 0 else DEFAULT_MODULE_NAME
+
+        parser_module = importlib.import_module("pytijo.modules.{}".format(module_name))
+        parsed[k] = parser_module.parse(lines, key_name, v)
+
     return parsed
 
 
-def _parse_list(key, value, lines):
-    if isinstance(value[0], dict):
-        return _parse_dict(value[0], lines, return_list=True)
-    else:
-        return _parse_regex(lines, key, value[0], return_list=True)
-
-
 def _parse_dict(value, lines, return_list=False):
-    if "block_start" in value or "id" in value:
+    if ATTR_BLOCK_START in value or ATTR_ID in value:
         chunks = _chunk_lines(lines, value)
         if chunks is not None:
             parsed = [parse_struct(chunk, value) for chunk in chunks]
@@ -44,19 +78,21 @@ def _parse_dict(value, lines, return_list=False):
 
 
 def _chunk_lines(lines, struct):
-    if "id" not in struct and "block_start" not in struct:
+    if ATTR_ID not in struct and ATTR_BLOCK_START not in struct:
         raise KeyError(
-            "'id' or 'block_start' key is required in a list containing a dictionary"
+            "'{}' or '{}' key is required in a list containing a dictionary".format(
+                ATTR_ID, ATTR_BLOCK_START
+            )
         )
-    id = struct["block_start"] if "block_start" in struct else struct["id"]
-    id_regex = _compile_regex("id", id)
+    id = struct[ATTR_BLOCK_START] if ATTR_BLOCK_START in struct else struct[ATTR_ID]
+    id_regex = _compile_regex(ATTR_ID, id)
     matches = list(filter(id_regex.search, lines))
     if not matches:
         return None
     match_indexes = _index_of_matches(matches, lines)
     force_block_end_index = -1
-    if "block_end" in struct:
-        block_end_regex = _compile_regex("block_end", struct["block_end"])
+    if ATTR_BLOCK_END in struct:
+        block_end_regex = _compile_regex(ATTR_BLOCK_END, struct[ATTR_BLOCK_END])
         block_end_matches = list(filter(block_end_regex.search, lines))
         if block_end_matches:
             block_end_indexes = _index_of_matches(block_end_matches, lines)

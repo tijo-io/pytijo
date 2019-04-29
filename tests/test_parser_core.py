@@ -107,7 +107,7 @@ def test_do_chunk_lines_force_block_end(mock_chunky_data):
 
 def test_chunk_lines_by_id(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"id": r"(Chunk\sStart)"}
+    struct = {"@id": r"(Chunk\sStart)"}
     expected_chunks = [lines[0:3], lines[3::]]
     chunks = parser._chunk_lines(lines, struct)
     assert chunks == expected_chunks
@@ -115,7 +115,7 @@ def test_chunk_lines_by_id(mock_chunky_data):
 
 def test_chunk_lines_by_block_start(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"block_start": r"(Chunk\sStart)"}
+    struct = {"@block_start": r"(Chunk\sStart)"}
     expected_chunks = [lines[0:3], lines[3::]]
     chunks = parser._chunk_lines(lines, struct)
     assert chunks == expected_chunks
@@ -123,7 +123,7 @@ def test_chunk_lines_by_block_start(mock_chunky_data):
 
 def test_chunk_lines_force_break_end(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"block_start": r"(Chunk\sStart)", "block_end": r"(chunk content 2)"}
+    struct = {"@block_start": r"(Chunk\sStart)", "@block_end": r"(chunk content 2)"}
     expected_chunks = [lines[0:4]]
     chunks = parser._chunk_lines(lines, struct)
     assert chunks == expected_chunks
@@ -131,7 +131,7 @@ def test_chunk_lines_force_break_end(mock_chunky_data):
 
 def test_chunk_lines_no_match_returns_none(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"block_start": r"(Elephant)"}
+    struct = {"@block_start": r"(Elephant)"}
     chunks = parser._chunk_lines(lines, struct)
     assert chunks is None
 
@@ -145,7 +145,7 @@ def test_chunk_lines_no_id_or_block_start_raises_exception(mock_chunky_data):
 
 def test_chunk_lines_no_block_end_match_raises_warning(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"block_start": r"(Chunk\sStart)", "block_end": r"(Elephant)"}
+    struct = {"@block_start": r"(Chunk\sStart)", "@block_end": r"(Elephant)"}
     expected_chunks = [lines[0:3], lines[3::]]
     with pytest.warns(UserWarning):
         chunks = parser._chunk_lines(lines, struct)
@@ -162,7 +162,7 @@ def test_parse_dict_simple():
 
 def test_parse_dict_with_id(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
-    struct = {"id": r"(Chunk\sStart)", "content_no": r"Some\schunk\scontent\s(\d)"}
+    struct = {"@id": r"(Chunk\sStart)", "content_no": r"Some\schunk\scontent\s(\d)"}
     parsed = parser._parse_dict(struct, lines)
     expected_output = {"id": "Chunk Start", "content_no": "1"}
     assert parsed == expected_output
@@ -171,7 +171,7 @@ def test_parse_dict_with_id(mock_chunky_data):
 def test_parse_dict_with_block_start(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
     struct = {
-        "block_start": r"(Chunk\sStart)",
+        "@block_start": r"(Chunk\sStart)",
         "content_no": r"Some\schunk\scontent\s(\d)",
     }
     parsed = parser._parse_dict(struct, lines)
@@ -182,7 +182,7 @@ def test_parse_dict_with_block_start(mock_chunky_data):
 def test_parse_dict_return_list(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
     struct = {
-        "block_start": r"(Chunk\sStart)",
+        "@block_start": r"(Chunk\sStart)",
         "content_no": r"Some\schunk\scontent\s(\d)",
     }
     parsed = parser._parse_dict(struct, lines, return_list=True)
@@ -193,7 +193,7 @@ def test_parse_dict_return_list(mock_chunky_data):
 def test_parse_dict_return_none(mock_chunky_data):
     lines = mock_chunky_data.splitlines()
     struct = {
-        "block_start": r"(Chunk\sEnd)",
+        "@block_start": r"(Chunk\sEnd)",
         "content_no": r"Some\schunk\scontent\s(\d)",
     }
     parsed = parser._parse_dict(struct, lines)
@@ -208,8 +208,8 @@ def test_parse_list_simple():
         "The count says: 4",
         "The count says: 5",
     ]
-    parsed = parser._parse_list("count", [r"(\d)"], lines)
-    expected_output = ["1", "2", "3", "4", "5"]
+    parsed = parser._parse_dict({"count": [r"(\d)"]}, lines)
+    expected_output = {"count": ["1", "2", "3", "4", "5"]}
     assert parsed == expected_output
 
 
@@ -221,9 +221,11 @@ def test_parse_list_with_dictionary():
         "The count says: 4",
         "The count says: 5",
     ]
-    struct = [{"id": r"(\d)"}]
-    parsed = parser._parse_list("id", struct, lines)
-    expected_output = [{"id": "1"}, {"id": "2"}, {"id": "3"}, {"id": "4"}, {"id": "5"}]
+    struct = {"id": [{"@id": r"(\d)"}]}
+    parsed = parser._parse_dict(struct, lines)
+    expected_output = {
+        "id": [{"id": "1"}, {"id": "2"}, {"id": "3"}, {"id": "4"}, {"id": "5"}]
+    }
     assert parsed == expected_output
 
 
@@ -235,7 +237,7 @@ def test_parse_returns_none():
         "The count says: 4",
         "The count says: 5",
     ]
-    parsed_list = parser._parse_list("count", [r"(elephant)"], lines)
-    assert parsed_list is None
-    parsed_dict = parser._parse_list("id", [{"id": r"(elephant)"}], lines)
-    assert parsed_dict is None
+    parsed_list = parser._parse_dict({"count": [r"(elephant)"]}, lines)
+    assert parsed_list == {"count": None}
+    parsed_dict = parser._parse_dict({"id": [{"@id": r"(elephant)"}]}, lines)
+    assert parsed_dict == {"id": None}
