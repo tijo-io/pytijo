@@ -67,7 +67,7 @@ def parse(lines, key, value):
         # if the regexis provided as a list then we take as many values as possible
         # if not, we just take the first value
         for match in regex.finditer(line):
-            values.append(match.group(1) if regex.groups > 0 else match.group())
+            values.append(match.group(group) if regex.groups > 0 else match.group())
             if not is_list:
                 break
 
