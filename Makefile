@@ -14,7 +14,8 @@ deps:
 	.venv/bin/pip install -Ur dev-requirements.txt
 
 clean:
-	rm -rf .cache/ .tox/ *.egg-info dist build
+	rm -rf .cache/ .tox/ *.egg-info/ dist build .pytest_cache/
+	find . -type f -name *.pyc -delete
 
 dev:
 	deps

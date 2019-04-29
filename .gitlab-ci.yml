@@ -1,5 +1,5 @@
 test:
-  image: conchoid/docker-pyenv
+  image: randomknowledge/docker-pyenv-tox
   script:
-  - pip install -r dev-requirements.txt
-  - tox
+    - pip install -r dev-requirements.txt
+    - tox
