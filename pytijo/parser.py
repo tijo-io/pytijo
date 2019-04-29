@@ -62,7 +62,7 @@ def parse_struct(lines, struct):
         module_name = module_name if len(module_name) > 0 else DEFAULT_MODULE_NAME
 
         parser_module = importlib.import_module("pytijo.modules.{}".format(module_name))
-        parsed[k] = parser_module.parse(lines, key_name, v)
+        parsed[key_name] = parser_module.parse(lines, key_name, v)
 
     return parsed
 

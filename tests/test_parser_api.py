@@ -111,6 +111,33 @@ def test_simple_list():
     assert parsed == expected_output
 
 
+def test_re_custom_groups_list():
+    struct = {"count@tijo_re": [{"regex": r"(\d)\s+(\d)\s+(\d)\s+(\d)", "group": 2}]}
+    lines = [
+        "The count says: 1 2 3 4",
+        "The count says: 2 3 4 1",
+        "The count says: 3 4 1 2",
+        "The count says: 4 1 2 3",
+    ]
+    expected_output = {"count": ["2", "3", "4", "1"]}
+    parsed = parser.parse_struct(lines, struct)
+    assert parsed == expected_output
+
+
+def test_re_custom_groups_single():
+
+    struct = {"count@tijo_re": {"regex": r"(\d)\s+(\d)\s+(\d)\s+(\d)", "group": 2}}
+    lines = [
+        "The count says: 1 2 3 4",
+        "The count says: 2 3 4 1",
+        "The count says: 3 4 1 2",
+        "The count says: 4 1 2 3",
+    ]
+    expected_output = {"count": "2"}
+    parsed = parser.parse_struct(lines, struct)
+    assert parsed == expected_output
+
+
 def test_flows(mock_struct):
     lines = read("./flow_output.txt").splitlines()
     expected_output = json.loads(read("./flow_output_parsed.txt"))

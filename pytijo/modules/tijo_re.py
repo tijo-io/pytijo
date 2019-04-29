@@ -40,17 +40,17 @@ def parse(lines, key, value):
     group = 1
     is_list = False
     regex = value
-    if isinstance(regex, dict):
-        regex = _get_value(value, ATTR_REGEX)
-        group = (
-            group
-            if ATTR_GROUP not in value
-            else int(_get_value(value, ATTR_GROUP, default=1))
-        )
-
     if isinstance(regex, (list, tuple)):
         regex = regex[0]
         is_list = True
+
+    if isinstance(regex, dict):
+        group = (
+            group
+            if ATTR_GROUP not in regex
+            else int(_get_value(regex, ATTR_GROUP, default=1))
+        )
+        regex = _get_value(regex, ATTR_REGEX)
 
     if not isinstance(regex, six.string_types):
         raise TypeError(
@@ -62,29 +62,29 @@ def parse(lines, key, value):
     # by default the first group is the one choosen
     # if not parenthesis are provided in the regex then use group 0
     group = group if regex.groups >= group else 1 if regex.groups > 0 else 0
-    values = []
+    result = []
     for line in lines:
         # if the regexis provided as a list then we take as many values as possible
         # if not, we just take the first value
         for match in regex.finditer(line):
-            values.append(match.group(group) if regex.groups > 0 else match.group())
-            if not is_list:
+            result.append(match.group(group))
+            if is_list is False:
                 break
 
     # the result will be a list if the regex is provided as a list
-    if is_list:
-        return values if len(values) > 0 else None
-    return values[0] if len(values) > 0 else None
+    if is_list is True:
+        return result if len(result) > 0 else None
+    return result[0] if len(result) > 0 else None
 
 
 def _get_value(map, key, mandatory=False, default=None, allow_empty=True):
-    value = map.get(key)
-    if value is None:
+    result = map.get(key)
+    if result is None:
         if mandatory:
             raise AttributeError("{} not found".format(key))
-        value = default
+        result = default
 
-    if not allow_empty and (value is None or len(value) <= 0):
+    if not allow_empty and (result is None or len(result) <= 0):
         raise AttributeError("{} has empty value".format(key))
 
-    return value
+    return result
