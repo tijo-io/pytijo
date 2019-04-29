@@ -8,7 +8,7 @@ COPY_ID = True
 ATTR_BLOCK_START = "@block_start"
 ATTR_BLOCK_END = "@block_end"
 
-DEFAULT_MODULE_NAME = "tijore"
+DEFAULT_MODULE_NAME = "tijo_re"
 
 
 def parse(text, struct):
