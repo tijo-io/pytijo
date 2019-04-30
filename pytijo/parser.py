@@ -110,11 +110,13 @@ def _chunk_lines(text, struct):
 
         if start_position < 0 and end_match is None:
             start_position = match.span()[0]
+            continue
 
         end_position = end_match.span()[1] if end_match else start_match.span()[0] - 1
         chunk = chunk_to_text[start_position, end_position]
         chunk_to_text = chunk_to_text[end_position + 1 :]
         chunks.append(chunk)
+        start_position = match.span()[0]
 
     if len(chunk_to_text) > 0:
         chunks.append(chunk_to_text)
