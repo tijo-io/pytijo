@@ -35,7 +35,7 @@ ATTR_REGEX = "regex"
 ATTR_GROUP = "group"
 
 
-def parse(lines, key, value):
+def parse(text, key, value):
 
     group = 1
     is_list = False
@@ -63,13 +63,13 @@ def parse(lines, key, value):
     # if not parenthesis are provided in the regex then use group 0
     group = group if regex.groups >= group else 1 if regex.groups > 0 else 0
     result = []
-    for line in lines:
-        # if the regexis provided as a list then we take as many values as possible
-        # if not, we just take the first value
-        for match in regex.finditer(line):
-            result.append(match.group(group))
-            if is_list is False:
-                break
+
+    # if the regexis provided as a list then we take as many values as possible
+    # if not, we just take the first value
+    for match in regex.finditer(text):
+        result.append(match.group(group))
+        if is_list is False:
+            break
 
     # the result will be a list if the regex is provided as a list
     if is_list is True:
