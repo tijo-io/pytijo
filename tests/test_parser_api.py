@@ -9,10 +9,10 @@ def mock_struct(request):
     return {
         "tables": [
             {
-                "@id": "\[TABLE (\d{1,2})\]",
+                "#id": "\[TABLE (\d{1,2})\]",
                 "flows": [
                     {
-                        "@id": "\[FLOW_ID(\d+)\]",
+                        "#id": "\[FLOW_ID(\d+)\]",
                         "timestamp": "Timestamp\s+=\s+(.+)",
                         "ofp_version": "ofp_version\s+=\s+(\d+)",
                         "controller_group": "ControllerGroup\s+=\s+(\d+)",
@@ -25,31 +25,31 @@ def mock_struct(request):
                         "cookie": "Cookie\s+=\s+([0-9a-fA-F]+)",
                         "send_flow_rem": "Send_flow_rem\s+=\s+(true|false)",
                         "match_fields": {
-                            "@start": "(\[MATCHFIELDS\])",
-                            "@end": "(\[INSTRUCTIONS\])",
+                            "#start": "(\[MATCHFIELDS\])",
+                            "#end": "(\[INSTRUCTIONS\])",
                             "ether_type": "OFPXMT_OFB_ETH_TYPE\s+=\s+(.+)",
                             "in_port": "OFPXMT_OFB_IN_PORT\s+=\s+(.+)",
                             "mpls_label": "OFPXMT_OFB_MPLS_LABEL\s+=\s+(.+)",
                         },
                         "instructions": {
-                            "@start": "(\[INSTRUCTIONS\])",
+                            "#start": "(\[INSTRUCTIONS\])",
                             "go_to_table": {
-                                "@start": "(\[OFPIT_GOTO_TABLE\])",
+                                "#start": "(\[OFPIT_GOTO_TABLE\])",
                                 "table": "table\s+=\s+(\d+)",
                             },
                             "apply_actions": {
-                                "@start": "(\[OFPIT_APPLY_ACTIONS\])",
+                                "#start": "(\[OFPIT_APPLY_ACTIONS\])",
                                 "output": {
                                     "port": "port\s+=\s+(.+)",
                                     "mlen": "mlen\s+=\s+(.+)",
                                 },
                                 "pop_mpls": {
-                                    "@start": "(\[OFPAT_POP_MPLS\])",
+                                    "#start": "(\[OFPAT_POP_MPLS\])",
                                     "eth": "eth\s+=\s+(.+)",
                                 },
                                 "group": {
-                                    "@start": "(\[OFPAT_GROUP\])",
-                                    "@id": "id\s+=\s+(\d+)",
+                                    "#start": "(\[OFPAT_GROUP\])",
+                                    "#id": "id\s+=\s+(\d+)",
                                 },
                             },
                         },
