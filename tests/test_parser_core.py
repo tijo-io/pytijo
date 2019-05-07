@@ -14,6 +14,17 @@ def mock_chunky_data(request):
     return output
 
 
+@pytest.fixture(scope="module")
+def mock_chunky_single_line_data(request):
+    output = "Some Identifiable Chunk Start: "
+    output += "Some chunk content 1 "
+    output += "Some more chunk content 1 "
+    output += "Some Other Identifiable Chunk Start: "
+    output += "Some chunk content 2 "
+    output += "Some more chunk content 2 "
+    return output
+
+
 def test_can_compile_regex():
     regex = parser._compile_regex("message", r"(\S+)")
     re.purge()
@@ -41,6 +52,16 @@ def test_chunk_lines_by_id(mock_chunky_data):
     assert chunks == expected_chunks
 
 
+def test_chunk_single_line_by_id(mock_chunky_single_line_data):
+    struct = {"#id": r"(Chunk\sStart)"}
+    expected_chunks = [
+        "Chunk Start: Some chunk content 1 Some more chunk content 1 Some Other Identifiable ",
+        "Chunk Start: Some chunk content 2 Some more chunk content 2 ",
+    ]
+    chunks = parser._chunk_lines(mock_chunky_single_line_data, struct)
+    assert chunks == expected_chunks
+
+
 def test_chunk_lines_by_block_start(mock_chunky_data):
     struct = {"#start": r"(Chunk\sStart)"}
     expected_chunks = [
@@ -48,6 +69,16 @@ def test_chunk_lines_by_block_start(mock_chunky_data):
         "Chunk Start:\r\nSome chunk content 2\r\nSome more chunk content 2\r\n",
     ]
     chunks = parser._chunk_lines(mock_chunky_data, struct)
+    assert chunks == expected_chunks
+
+
+def test_chunk_lines_single_line_by_block_start(mock_chunky_single_line_data):
+    struct = {"#start": r"(Chunk\sStart)"}
+    expected_chunks = [
+        "Chunk Start: Some chunk content 1 Some more chunk content 1 Some Other Identifiable ",
+        "Chunk Start: Some chunk content 2 Some more chunk content 2 ",
+    ]
+    chunks = parser._chunk_lines(mock_chunky_single_line_data, struct)
     assert chunks == expected_chunks
 
 
