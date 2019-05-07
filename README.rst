@@ -107,12 +107,12 @@ dictionary/structure that was provided with values from the input text.
 | Quite often, similar sections of semi-structured text are repeated in
   the text you are trying to parse.
 | To parse these sections of text, we define a dictionary with key of
-  either ``@id`` or ``@start`` the difference being ``@start``
+  either ``#id`` or ``#start`` the difference being ``#start``
   key/value is dropped from the resulting output.
-| This ``@id`` or ``@start`` marks the beginning and end for each
+| This ``#id`` or ``#start`` marks the beginning and end for each
   “chunk” that you’d like parsed.
 | You can forcefully mark the end of a “chunk” by specifying a
-  ``@end`` key and regex value.
+  ``#end`` key and regex value.
 
 An example is useful here.
 

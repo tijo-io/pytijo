@@ -10,9 +10,11 @@ def mock_struct(request):
         "tables": [
             {
                 "#id": "\[TABLE (\d{1,2})\]",
+                "id": "\[TABLE (\d{1,2})\]",
                 "flows": [
                     {
                         "#id": "\[FLOW_ID(\d+)\]",
+                        "id": "\[FLOW_ID(\d+)\]",
                         "timestamp": "Timestamp\s+=\s+(.+)",
                         "ofp_version": "ofp_version\s+=\s+(\d+)",
                         "controller_group": "ControllerGroup\s+=\s+(\d+)",
@@ -65,13 +67,13 @@ def mock_group_struct(request):
     return {
         "groups": [
             {
-                "@id": "Group id:\s+(\d+)",
+                "#id": "Group id:\s+(\d+)",
                 "ref_count": "Reference count:\s+(\d+)",
                 "packet_count": "Packet count:\s+(\d+)",
                 "byte_count": "Byte count:\s+(\d+)",
                 "bucket": [
                     {
-                        "@id": "Bucket\s+(\d+)",
+                        "#id": "Bucket\s+(\d+)",
                         "packet_count": "Packet count:\s+(\d+)",
                         "byte_count": "Byte count:\s+(\d+)",
                     }

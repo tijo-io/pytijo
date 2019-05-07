@@ -1,7 +1,17 @@
 import re
 import six
 import importlib
-from .constants import *
+from .constants import (
+    COPY_ID,
+    COPY_ID_NAME,
+    KEYWORD_ID,
+    KEYWORD_START,
+    KEYWORD_END,
+    KEYWORD_CHAR,
+    MODULE_CHAR,
+    CORE_MODULE_PACKAGE,
+    DEFAULT_MODULE_NAME,
+)
 
 
 def parse(text, struct):
@@ -17,6 +27,11 @@ def parse_struct(text, struct):
         text = "\n".join(text)
 
     parsed = {}
+
+    # to be backwards compatible #id attributed is added as id to the output
+    # TODO discuss if this should be like this
+    if KEYWORD_ID in struct and COPY_ID and COPY_ID_NAME not in struct:
+        struct[COPY_ID_NAME] = struct[KEYWORD_ID]
 
     for k, v in six.iteritems(struct):
         if not isinstance(k, six.string_types) or len(k) <= 0:
@@ -40,7 +55,10 @@ def parse_struct(text, struct):
             keyword = k
             k = k[1:]
 
-        if module_name is None:
+        # if it is such a key name without module check if we need to keep parsing inside
+        if (module_name is None or len(module_name) == 0) and (
+            keyword is None or len(keyword) == 0
+        ):
             return_as_list = False
             if (
                 isinstance(v, (list, tuple))
@@ -54,7 +72,7 @@ def parse_struct(text, struct):
                 parsed[k] = _parse_dict(v, text, return_list=return_as_list)
                 continue
 
-        if keyword != KEYWORD_START and keyword != KEYWORD_END:
+        if keyword not in (KEYWORD_START, KEYWORD_END, KEYWORD_ID):
             parsed[k] = parser_module.parse(text, k, v)
 
     return parsed
@@ -68,10 +86,13 @@ def _load_module(module_name=DEFAULT_MODULE_NAME):
 
 
 def _parse_dict(value, text, return_list=False):
-    if return_list and (KEYWORD_START in value or KEYWORD_ID in value):
+    if KEYWORD_START in value or KEYWORD_ID in value:
         chunks = _chunk_lines(text, value)
-        if chunks is not None:
-            return [parse_struct(chunk, value) for chunk in chunks]
+        if chunks is not None and len(chunks) > 0:
+            if return_list:
+                return [parse_struct(chunk, value) for chunk in chunks]
+            return parse_struct(chunks[0], value)
+
         return None
     return parse_struct(text, value)
 
@@ -85,35 +106,42 @@ def _chunk_lines(text, struct):
         )
 
     # TODO make this more intelligent. For example, make start like
-    # '@start': {'regex': '<the-regex>',skip: true, group:1} that will allow to customize
+    # '#start': {'regex': '<the-regex>',skip: true, group:1} that will allow to customize
     # thinks like which group to use and if the text matched should be included or not
     start = struct[KEYWORD_START] if KEYWORD_START in struct else struct[KEYWORD_ID]
     start_regex = _compile_regex(KEYWORD_ID, start)
 
     end = struct[KEYWORD_END] if KEYWORD_END in struct else None
-    end_regex = _compile_regex(KEYWORD_ID, end) if end is not None else None
+    end_regex = _compile_regex(KEYWORD_END, end) if end is not None else None
 
     chunks = []
-    start_position = -1
-    chunk_to_text = text
-    while len(chunk_to_text) > 0:
-        start_match = start_regex.match(text)
-        if not start_match:
-            break
-        end_match = end_regex.match(text) if end_regex else None
-
-        if start_position < 0 and end_match is None:
-            start_position = start_match.span()[0]
-            continue
-
-        end_position = end_match.span()[1] if end_match else start_match.span()[0] - 1
-        chunk = chunk_to_text[start_position, end_position]
-        chunk_to_text = chunk_to_text[end_position + 1 :]
-        chunks.append(chunk)
-        start_position = start_match.span()[0]
-
-    if len(chunk_to_text) > 0:
-        chunks.append(chunk_to_text)
+    if not end_regex:
+        start_position = -1
+        for match in start_regex.finditer(text):
+            if start_position < 0:
+                start_position = match.span()[0]
+                continue
+            chunk = text[start_position : match.span()[0] - 1]
+            if len(chunk) > 0:
+                chunks.append(chunk)
+            start_position = match.span()[0]
+        if start_position >= 0 and len(text) > start_position:
+            chunk = text[start_position : len(text)]
+            chunks.append(chunk)
+    else:
+        while len(text) > 0:
+            start_match = start_regex.search(text)
+            end_match = end_regex.search(text)
+            if not start_match or not end_match:
+                break
+            chunk = text[start_match.span()[0] : end_match.span()[1]]
+            text = text[
+                end_match.span()[0] - 1
+                if start_match.span()[1] < end_match.span()[0]
+                else start_match.span()[1] + 1 :
+            ]
+            if len(chunk) > 0:
+                chunks.append(chunk)
 
     return chunks
 
