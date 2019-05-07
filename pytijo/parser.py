@@ -121,7 +121,7 @@ def _chunk_lines(text, struct):
             if start_position < 0:
                 start_position = match.span()[0]
                 continue
-            chunk = text[start_position : match.span()[0] - 1]
+            chunk = text[start_position : match.span()[0]]
             if len(chunk) > 0:
                 chunks.append(chunk)
             start_position = match.span()[0]
@@ -143,7 +143,7 @@ def _chunk_lines(text, struct):
             if len(chunk) > 0:
                 chunks.append(chunk)
 
-    return chunks
+    return chunks if len(chunks) > 0 else None
 
 
 def _compile_regex(key, regex):

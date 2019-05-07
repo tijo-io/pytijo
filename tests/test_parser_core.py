@@ -31,56 +31,54 @@ def test_value_not_regex_string_raises_exception():
         parser._compile_regex("message", re.compile(r"(\S+)"))
 
 
-# TODO adapt the chunk lines test without having lines in an array
-"""
-
 def test_chunk_lines_by_id(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"#id": r"(Chunk\sStart)"}
-    expected_chunks = [lines[0:3], lines[3::]]
-    chunks = parser._chunk_lines(lines, struct)
+    expected_chunks = [
+        "Chunk Start:\r\nSome chunk content 1\r\nSome more chunk content 1\r\nSome Other Identifiable ",
+        "Chunk Start:\r\nSome chunk content 2\r\nSome more chunk content 2\r\n",
+    ]
+    chunks = parser._chunk_lines(mock_chunky_data, struct)
     assert chunks == expected_chunks
 
 
 def test_chunk_lines_by_block_start(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"#start": r"(Chunk\sStart)"}
-    expected_chunks = [lines[0:3], lines[3::]]
-    chunks = parser._chunk_lines(lines, struct)
+    expected_chunks = [
+        "Chunk Start:\r\nSome chunk content 1\r\nSome more chunk content 1\r\nSome Other Identifiable ",
+        "Chunk Start:\r\nSome chunk content 2\r\nSome more chunk content 2\r\n",
+    ]
+    chunks = parser._chunk_lines(mock_chunky_data, struct)
     assert chunks == expected_chunks
 
 
 def test_chunk_lines_force_break_end(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"#start": r"(Chunk\sStart)", "#end": r"(chunk content 2)"}
-    expected_chunks = [lines[0:4]]
-    chunks = parser._chunk_lines(lines, struct)
+    expected_chunks = [
+        "Chunk Start:\r\nSome chunk content 1\r\nSome more chunk content 1\r\nSome Other Identifiable Chunk Start:\r\nSome chunk content 2"
+    ]
+    chunks = parser._chunk_lines(mock_chunky_data, struct)
     assert chunks == expected_chunks
 
 
 def test_chunk_lines_no_match_returns_none(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"#start": r"(Elephant)"}
-    chunks = parser._chunk_lines(lines, struct)
+    chunks = parser._chunk_lines(mock_chunky_data, struct)
     assert chunks is None
 
 
 def test_chunk_lines_no_id_or_block_start_raises_exception(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"yo": r"(Chunk\sStart)"}
     with pytest.raises(KeyError):
-        parser._chunk_lines(lines, struct)
+        parser._chunk_lines(mock_chunky_data, struct)
 
 
+# TODO decide if #end does not but #start does
 def test_chunk_lines_no_block_end_match_raises_warning(mock_chunky_data):
-    lines = mock_chunky_data.splitlines()
     struct = {"#start": r"(Chunk\sStart)", "#end": r"(Elephant)"}
-    expected_chunks = [lines[0:3], lines[3::]]
-    with pytest.warns(UserWarning):
-        chunks = parser._chunk_lines(lines, struct)
-        assert chunks == expected_chunks
-
-"""
+    expected_chunks = None
+    # with pytest.warns(UserWarning):
+    chunks = parser._chunk_lines(mock_chunky_data, struct)
+    assert chunks == expected_chunks
 
 
 def test_parse_dict_simple():
