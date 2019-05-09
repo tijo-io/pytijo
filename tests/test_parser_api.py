@@ -10,11 +10,9 @@ def mock_struct(request):
         "tables": [
             {
                 "#id": "\[TABLE (\d{1,2})\]",
-                "id": "\[TABLE (\d{1,2})\]",
                 "flows": [
                     {
                         "#id": "\[FLOW_ID(\d+)\]",
-                        "id": "\[FLOW_ID(\d+)\]",
                         "timestamp": "Timestamp\s+=\s+(.+)",
                         "ofp_version": "ofp_version\s+=\s+(\d+)",
                         "controller_group": "ControllerGroup\s+=\s+(\d+)",

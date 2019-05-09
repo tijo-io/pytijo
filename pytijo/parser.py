@@ -2,8 +2,6 @@ import re
 import six
 import importlib
 from .constants import (
-    COPY_ID,
-    COPY_ID_NAME,
     KEYWORD_ID,
     KEYWORD_START,
     KEYWORD_END,
@@ -27,11 +25,6 @@ def parse_struct(text, struct):
         text = "\n".join(text)
 
     parsed = {}
-
-    # to be backwards compatible #id attributed is added as id to the output
-    # TODO discuss if this should be like this
-    if KEYWORD_ID in struct and COPY_ID and COPY_ID_NAME not in struct:
-        struct[COPY_ID_NAME] = struct[KEYWORD_ID]
 
     for k, v in six.iteritems(struct):
         if not isinstance(k, six.string_types) or len(k) <= 0:
@@ -72,7 +65,7 @@ def parse_struct(text, struct):
                 parsed[k] = _parse_dict(v, text, return_list=return_as_list)
                 continue
 
-        if keyword not in (KEYWORD_START, KEYWORD_END, KEYWORD_ID):
+        if keyword not in (KEYWORD_START, KEYWORD_END):
             parsed[k] = parser_module.parse(text, k, v)
 
     return parsed

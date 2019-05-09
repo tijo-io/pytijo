@@ -62,7 +62,7 @@ Pass your text and a "structure" (python dictionary) to the ``parser`` modules `
 
   struct = {
           'interfaces': [{
-              'id': '(eth\d{1,2})',
+              '#id': '(eth\d{1,2})',
               'ipv4_address': 'inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
               'mac_address': 'HWaddr\s((?:[a-fA-F0-9]{2}[:|\-]?){6})'
             }]
@@ -123,10 +123,10 @@ E.g. The following structure.
     {
             'tables': [
                 {
-                    'id': '\[TABLE (\d{1,2})\]',
+                    '#id': '\[TABLE (\d{1,2})\]',
                     'flows': [
                         {
-                            'id': '\[FLOW_ID(\d+)\]',
+                            '#id': '\[FLOW_ID(\d+)\]',
                             'info': 'info\s+=\s+(.*)'
                         }
                     ]
