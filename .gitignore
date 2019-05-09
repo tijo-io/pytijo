@@ -82,6 +82,8 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Visual Studio
+.vscode
 # IntelliJ Idea family of suites
 .idea
 *.iml

@@ -59,10 +59,10 @@ Pass your text and a "structure" (python dictionary) to the ``parser`` modules `
               collisions:0 txqueuelen:1000
               RX bytes:4999277179 (4.9 GB)  TX bytes:657283496 (657.2 MB)
     """
-  
+
   struct = {
           'interfaces': [{
-              'id': '(eth\d{1,2})',
+              '#id': '(eth\d{1,2})',
               'ipv4_address': 'inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
               'mac_address': 'HWaddr\s((?:[a-fA-F0-9]{2}[:|\-]?){6})'
             }]
@@ -107,12 +107,12 @@ dictionary/structure that was provided with values from the input text.
 | Quite often, similar sections of semi-structured text are repeated in
   the text you are trying to parse.
 | To parse these sections of text, we define a dictionary with key of
-  either ``id`` or ``block_start`` the difference being ``block_start``
+  either ``#id`` or ``#start`` the difference being ``#start``
   key/value is dropped from the resulting output.
-| This ``id`` or ``block_start`` marks the beginning and end for each
+| This ``#id`` or ``#start`` marks the beginning and end for each
   “chunk” that you’d like parsed.
 | You can forcefully mark the end of a “chunk” by specifying a
-  ``block_end`` key and regex value.
+  ``#end`` key and regex value.
 
 An example is useful here.
 
@@ -123,10 +123,10 @@ E.g. The following structure.
     {
             'tables': [
                 {
-                    'id': '\[TABLE (\d{1,2})\]',
+                    '#id': '\[TABLE (\d{1,2})\]',
                     'flows': [
                         {
-                            'id': '\[FLOW_ID(\d+)\]',
+                            '#id': '\[FLOW_ID(\d+)\]',
                             'info': 'info\s+=\s+(.*)'
                         }
                     ]

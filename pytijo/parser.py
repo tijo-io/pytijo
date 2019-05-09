@@ -1,106 +1,142 @@
 import re
 import six
-import warnings
+import importlib
+from .constants import (
+    KEYWORD_ID,
+    KEYWORD_START,
+    KEYWORD_END,
+    KEYWORD_CHAR,
+    MODULE_CHAR,
+    CORE_MODULE_PACKAGE,
+    DEFAULT_MODULE_NAME,
+)
 
 
 def parse(text, struct):
+    if isinstance(text, (list, tuple)):
+        text = "\n".join(text)
     if isinstance(text, six.string_types):
-        return parse_struct(text.splitlines(), struct)
+        return parse_struct(text, struct)
     return None
 
 
-def parse_struct(lines, struct):
+def parse_struct(text, struct):
+    if isinstance(text, (list, tuple)):
+        text = "\n".join(text)
+
     parsed = {}
+
     for k, v in six.iteritems(struct):
-        if (
-            isinstance(v, (list, tuple))
-            and not isinstance(v, six.string_types)
-            and len(v) > 0
+        if not isinstance(k, six.string_types) or len(k) <= 0:
+            continue
+
+        k = k.strip().lower()
+        module_index = k.find(MODULE_CHAR)
+
+        # Get module name
+        module_name = None
+        if module_index > -1:
+            module_name = k[module_index + 1 :]
+            k = k[:module_index]
+
+        # Load parser module
+        parser_module = _load_module(module_name)
+
+        # Get keyword
+        keyword = None
+        if k.startswith(KEYWORD_CHAR):
+            keyword = k
+            k = k[1:]
+
+        # if it is such a key name without module check if we need to keep parsing inside
+        if (module_name is None or len(module_name) == 0) and (
+            keyword is None or len(keyword) == 0
         ):
-            parsed[k] = _parse_list(k, v, lines)
-        elif isinstance(v, dict):
-            parsed[k] = _parse_dict(v, lines)
-        else:
-            if k != "block_start" and k != "block_end":
-                parsed[k] = _parse_regex(lines, k, v)
+            return_as_list = False
+            if (
+                isinstance(v, (list, tuple))
+                and not isinstance(v, six.string_types)
+                and len(v) > 0
+                and isinstance(v[0], dict)
+            ):
+                v = v[0]
+                return_as_list = True
+            if isinstance(v, dict):
+                parsed[k] = _parse_dict(v, text, return_list=return_as_list)
+                continue
+
+        if keyword not in (KEYWORD_START, KEYWORD_END):
+            parsed[k] = parser_module.parse(text, k, v)
+
     return parsed
 
 
-def _parse_list(key, value, lines):
-    if isinstance(value[0], dict):
-        return _parse_dict(value[0], lines, return_list=True)
-    else:
-        return _parse_regex(lines, key, value[0], return_list=True)
+def _load_module(module_name=DEFAULT_MODULE_NAME):
+    # TODO: Load module from other packages
+    if module_name is None or len(module_name) == 0:
+        module_name = DEFAULT_MODULE_NAME
+    return importlib.import_module("{}.{}".format(CORE_MODULE_PACKAGE, module_name))
 
 
-def _parse_dict(value, lines, return_list=False):
-    if "block_start" in value or "id" in value:
-        chunks = _chunk_lines(lines, value)
-        if chunks is not None:
-            parsed = [parse_struct(chunk, value) for chunk in chunks]
-            return parsed if return_list else parsed[0]
+def _parse_dict(value, text, return_list=False):
+    if KEYWORD_START in value or KEYWORD_ID in value:
+        chunks = _chunk_lines(text, value)
+        if chunks is not None and len(chunks) > 0:
+            if return_list:
+                return [parse_struct(chunk, value) for chunk in chunks]
+            return parse_struct(chunks[0], value)
+
         return None
-    return parse_struct(lines, value)
+    return parse_struct(text, value)
 
 
-def _chunk_lines(lines, struct):
-    if "id" not in struct and "block_start" not in struct:
+def _chunk_lines(text, struct):
+    if KEYWORD_ID not in struct and KEYWORD_START not in struct:
         raise KeyError(
-            "'id' or 'block_start' key is required in a list containing a dictionary"
-        )
-    id = struct["block_start"] if "block_start" in struct else struct["id"]
-    id_regex = _compile_regex("id", id)
-    matches = list(filter(id_regex.search, lines))
-    if not matches:
-        return None
-    match_indexes = _index_of_matches(matches, lines)
-    force_block_end_index = -1
-    if "block_end" in struct:
-        block_end_regex = _compile_regex("block_end", struct["block_end"])
-        block_end_matches = list(filter(block_end_regex.search, lines))
-        if block_end_matches:
-            block_end_indexes = _index_of_matches(block_end_matches, lines)
-            force_block_end_index = next(
-                (i for i in block_end_indexes if i > match_indexes[0]), -1
+            "'{}' or '{}' key is required in a list containing a dictionary".format(
+                KEYWORD_ID, KEYWORD_START
             )
-        else:
-            warnings.warn("The block_end regular expression does not find a match")
+        )
 
-    return _do_chunk_lines(lines, match_indexes, force_block_end_index)
+    # TODO make this more intelligent. For example, make start like
+    # '#start': {'regex': '<the-regex>',skip: true, group:1} that will allow to customize
+    # thinks like which group to use and if the text matched should be included or not
+    start = struct[KEYWORD_START] if KEYWORD_START in struct else struct[KEYWORD_ID]
+    start_regex = _compile_regex(KEYWORD_ID, start)
 
+    end = struct[KEYWORD_END] if KEYWORD_END in struct else None
+    end_regex = _compile_regex(KEYWORD_END, end) if end is not None else None
 
-def _do_chunk_lines(lines, match_indexes, force_block_end_index=-1):
     chunks = []
-    if force_block_end_index >= 0:
-        return [lines[match_indexes[0] : force_block_end_index]]
-    for idx, val in enumerate(match_indexes):
-        if idx + 1 >= len(match_indexes):
-            chunks.append(lines[val::])
-        elif val <= match_indexes[-1]:
-            if match_indexes[idx + 1] >= match_indexes[-1]:
-                chunks.append(lines[val : match_indexes[-1]])
-            else:
-                chunks.append(lines[val : match_indexes[idx + 1]])
-    return chunks
+    if not end_regex:
+        start_position = -1
+        for match in start_regex.finditer(text):
+            if start_position < 0:
+                start_position = match.span()[0]
+                continue
+            chunk = text[start_position : match.span()[0]]
+            if len(chunk) > 0:
+                chunks.append(chunk)
+            start_position = match.span()[0]
+        if start_position >= 0 and len(text) > start_position:
+            chunk = text[start_position : len(text)]
+            chunks.append(chunk)
+    else:
+        while len(text) > 0:
+            start_match = start_regex.search(text)
+            end_match = end_regex.search(text)
+            if not start_match or not end_match:
+                break
+            chunk = text[start_match.span()[0] : end_match.span()[1]]
+            text = text[
+                end_match.span()[0] - 1
+                if start_match.span()[1] < end_match.span()[0]
+                else start_match.span()[1] + 1 :
+            ]
+            if len(chunk) > 0:
+                chunks.append(chunk)
 
-
-def _parse_regex(lines, key, regex, return_list=False):
-    regex = _compile_regex(key, regex)
-    values = []
-    for line in lines:
-        # TODO: think if we shuold take more values from a single line
-        # match only takes one
-        match = regex.search(line)
-        if match:
-            values.append(match.group(1) if regex.groups > 0 else match.group())
-    if len(values) > 0 and not return_list:
-        return values[0]
-    return values if len(values) > 0 else None
-
-
-def _index_of_matches(matches, lines):
-    # list(set([])) removes duplicates
-    return sorted(list(set(map(lambda x: lines.index(x), matches))))
+    return chunks if len(chunks) > 0 else None
 
 
 def _compile_regex(key, regex):
