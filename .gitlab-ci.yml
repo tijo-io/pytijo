@@ -1,5 +1,15 @@
+# docker latest python image
+image: python
+
+
+# TODO: add deployment stage to push automatically to pypi
+stages:
+  - test
+
+# test source code formatting and tox testing
 test:
-  image: randomknowledge/docker-pyenv-tox
+  stage: test
   script:
     - pip install -r dev-requirements.txt
+    - black --check pytijo tests
     - tox

@@ -9,47 +9,47 @@ def mock_struct(request):
     return {
         "tables": [
             {
-                "#id": "\[TABLE (\d{1,2})\]",
+                "#id": r"\[TABLE (\d{1,2})\]",
                 "flows": [
                     {
-                        "#id": "\[FLOW_ID(\d+)\]",
-                        "timestamp": "Timestamp\s+=\s+(.+)",
-                        "ofp_version": "ofp_version\s+=\s+(\d+)",
-                        "controller_group": "ControllerGroup\s+=\s+(\d+)",
-                        "controller_id": "ControllerId\s+=\s+(\d+)",
-                        "priority": "Priority\s+=\s+(\d+)",
-                        "idle_timeout": "Idle_timeout\s+=\s+(\d+)",
-                        "hard_timeout": "Hard_timeout\s+=\s+(\d+)",
-                        "packet_count": "Packet_count\s+=\s+(\d+)",
-                        "byte_count": "Byte_count\s+=\s+(\d+)",
-                        "cookie": "Cookie\s+=\s+([0-9a-fA-F]+)",
-                        "send_flow_rem": "Send_flow_rem\s+=\s+(true|false)",
+                        "#id": r"\[FLOW_ID(\d+)\]",
+                        "timestamp": r"Timestamp\s+=\s+(.+)",
+                        "ofp_version": r"ofp_version\s+=\s+(\d+)",
+                        "controller_group": r"ControllerGroup\s+=\s+(\d+)",
+                        "controller_id": r"ControllerId\s+=\s+(\d+)",
+                        "priority": r"Priority\s+=\s+(\d+)",
+                        "idle_timeout": r"Idle_timeout\s+=\s+(\d+)",
+                        "hard_timeout": r"Hard_timeout\s+=\s+(\d+)",
+                        "packet_count": r"Packet_count\s+=\s+(\d+)",
+                        "byte_count": r"Byte_count\s+=\s+(\d+)",
+                        "cookie": r"Cookie\s+=\s+([0-9a-fA-F]+)",
+                        "send_flow_rem": r"Send_flow_rem\s+=\s+(true|false)",
                         "match_fields": {
-                            "#start": "(\[MATCHFIELDS\])",
-                            "#end": "(\[INSTRUCTIONS\])",
-                            "ether_type": "OFPXMT_OFB_ETH_TYPE\s+=\s+(.+)",
-                            "in_port": "OFPXMT_OFB_IN_PORT\s+=\s+(.+)",
-                            "mpls_label": "OFPXMT_OFB_MPLS_LABEL\s+=\s+(.+)",
+                            "#start": r"(\[MATCHFIELDS\])",
+                            "#end": r"(\[INSTRUCTIONS\])",
+                            "ether_type": r"OFPXMT_OFB_ETH_TYPE\s+=\s+(.+)",
+                            "in_port": r"OFPXMT_OFB_IN_PORT\s+=\s+(.+)",
+                            "mpls_label": r"OFPXMT_OFB_MPLS_LABEL\s+=\s+(.+)",
                         },
                         "instructions": {
-                            "#start": "(\[INSTRUCTIONS\])",
+                            "#start": r"(\[INSTRUCTIONS\])",
                             "go_to_table": {
-                                "#start": "(\[OFPIT_GOTO_TABLE\])",
-                                "table": "table\s+=\s+(\d+)",
+                                "#start": r"(\[OFPIT_GOTO_TABLE\])",
+                                "table": r"table\s+=\s+(\d+)",
                             },
                             "apply_actions": {
-                                "#start": "(\[OFPIT_APPLY_ACTIONS\])",
+                                "#start": r"(\[OFPIT_APPLY_ACTIONS\])",
                                 "output": {
-                                    "port": "port\s+=\s+(.+)",
-                                    "mlen": "mlen\s+=\s+(.+)",
+                                    "port": r"port\s+=\s+(.+)",
+                                    "mlen": r"mlen\s+=\s+(.+)",
                                 },
                                 "pop_mpls": {
-                                    "#start": "(\[OFPAT_POP_MPLS\])",
-                                    "eth": "eth\s+=\s+(.+)",
+                                    "#start": r"(\[OFPAT_POP_MPLS\])",
+                                    "eth": r"eth\s+=\s+(.+)",
                                 },
                                 "group": {
-                                    "#start": "(\[OFPAT_GROUP\])",
-                                    "#id": "id\s+=\s+(\d+)",
+                                    "#start": r"(\[OFPAT_GROUP\])",
+                                    "#id": r"id\s+=\s+(\d+)",
                                 },
                             },
                         },
@@ -65,15 +65,15 @@ def mock_group_struct(request):
     return {
         "groups": [
             {
-                "#id": "Group id:\s+(\d+)",
-                "ref_count": "Reference count:\s+(\d+)",
-                "packet_count": "Packet count:\s+(\d+)",
-                "byte_count": "Byte count:\s+(\d+)",
+                "#id": r"Group id:\s+(\d+)",
+                "ref_count": r"Reference count:\s+(\d+)",
+                "packet_count": r"Packet count:\s+(\d+)",
+                "byte_count": r"Byte count:\s+(\d+)",
                 "bucket": [
                     {
-                        "#id": "Bucket\s+(\d+)",
-                        "packet_count": "Packet count:\s+(\d+)",
-                        "byte_count": "Byte count:\s+(\d+)",
+                        "#id": r"Bucket\s+(\d+)",
+                        "packet_count": r"Packet count:\s+(\d+)",
+                        "byte_count": r"Byte count:\s+(\d+)",
                     }
                 ],
             }
