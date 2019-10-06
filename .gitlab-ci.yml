@@ -2,9 +2,9 @@
 image: python
 
 
-# TODO: add deployment stage to push automatically to pypi
 stages:
   - test
+  - deploy
 
 # test source code formatting and tox testing
 test:
@@ -13,3 +13,26 @@ test:
     - pip install -r dev-requirements.txt
     - black --check pytijo tests
     - tox
+
+
+deploy_staging:
+  stage: deploy
+  script:
+    - make package
+    - pip install twine
+    - twine upload -u $PYPI_USER -p $PYPI_PWD --repository-url $PYPI_TEST_REPO dist/*
+  except:
+    - tags
+
+# deploy to pypi if there is a new tag
+# the tag should be named vX.Y.Z
+deploy:
+  stage: deploy
+  script:
+    - make package
+    - pip install twine
+    - twine upload dist/* -u $PYPI_USER -p $PYPI_PWD
+  only:
+    - tags
+  except:
+    - branches
