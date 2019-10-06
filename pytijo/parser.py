@@ -144,4 +144,4 @@ def _compile_regex(key, regex):
         raise TypeError(
             "The value at key '{}' must be a regular expression string".format(key)
         )
-    return re.compile(regex)
+    return re.compile(regex, re.MULTILINE)
