@@ -24,7 +24,7 @@ else:
 
 setup(
     name="pytijo",
-    version="0.0.1",
+    version=version,
     description="Structure semi-structured text",
     license="Apache",
     author="Darin Sikanic",
